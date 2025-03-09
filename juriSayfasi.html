@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jüri Üyesi Paneli</title>
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header fixed-top d-flex align-items-center">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/Kouyenilogo.png" alt="KOU Logo" width="50">
+                <span class="ms-2 fw-bold">Kocaeli Üniversitesi</span>
+            </a>
+            <nav class="navbar">
+                <ul class="nav-menu d-flex align-items-center">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="ilan-ekle.html">İlan Ekle/Düzenle</a></li>
+                    <li><a href="basvurular.html">Başvurular</a></li>
+                </ul>
+            </nav>
+            <nav class="header-nav ms-auto d-flex align-items-center">
+                <a class="nav-link nav-icon" href="#">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge bg-primary badge-number">4</span>
+                </a>
+                <a class="nav-link nav-icon" href="#">
+                    <i class="bi bi-chat-left-text"></i>
+                    <span class="badge bg-success badge-number">3</span>
+                </a>
+                <div class="dropdown">
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle" width="36">
+                        <span class="d-none d-md-block ps-2">Jüri Üyesi</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li><a class="dropdown-item" href="users-profile.html"><i class="bi bi-person"></i> Profilim</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Çıkış Yap</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mt-5" style="margin-top: 100px !important;">
+        <div class="pagetitle text-center">
+            <h1>Jüri Üyesi Paneli</h1>
+        </div>
+        <div class="card p-4">
+            <h4>Aday Seçimi</h4>
+            <select class="form-control mb-3" id="candidateSelect" onchange="loadCandidateData()">
+                <option value="">Bir aday seçiniz</option>
+                <option value="1">Ahmet Yılmaz</option>
+                <option value="2">Merve Demir</option>
+                <option value="3">Can Kaya</option>
+            </select>
+
+            <div id="candidateDetails" style="display: none;">
+                <h4>Aday Başvuru Belgeleri</h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">İndeksli Yayın - <a href="#">İndir</a></li>
+                    <li class="list-group-item">Atıf Sayısı - <a href="#">İndir</a></li>
+                    <li class="list-group-item">Konferans Yayını - <a href="#">İndir</a></li>
+                </ul>
+                <h4>Değerlendirme Raporu Yükleme</h4>
+                <input type="file" class="form-control mb-3" id="reportFile" onchange="showFileName()">
+                <p id="fileName" class="text-muted"></p>
+                <label class="form-label">Nihai Değerlendirme:</label>
+                <select class="form-control mb-3" id="evaluation">
+                    <option value="">Seçiniz</option>
+                    <option value="Olumlu">Olumlu</option>
+                    <option value="Olumsuz">Olumsuz</option>
+                </select>
+                <button class="btn btn-primary" onclick="saveEvaluation()">Değerlendirmeyi Kaydet</button>
+                <p id="confirmationMessage" class="mt-3 text-success" style="display: none;">Değerlendirmeniz başarıyla kaydedildi.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer text-center py-3">
+        <p>&copy; 2025 Kocaeli Üniversitesi. Tüm Hakları Saklıdır.</p>
+    </footer>
+
+    <script>
+        function loadCandidateData() {
+            const selectedCandidate = document.getElementById("candidateSelect").value;
+            const detailsSection = document.getElementById("candidateDetails");
+            if (selectedCandidate) {
+                detailsSection.style.display = "block";
+            } else {
+                detailsSection.style.display = "none";
+            }
+        }
+
+        function showFileName() {
+            const fileInput = document.getElementById("reportFile");
+            const fileNameDisplay = document.getElementById("fileName");
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = "Yüklenen dosya: " + fileInput.files[0].name;
+            } else {
+                fileNameDisplay.textContent = "";
+            }
+        }
+
+        function saveEvaluation() {
+            const evaluation = document.getElementById("evaluation").value;
+            if (!evaluation) {
+                alert("Lütfen bir değerlendirme seçiniz.");
+                return;
+            }
+            document.getElementById("confirmationMessage").style.display = "block";
+        }
+    </script>
+
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
