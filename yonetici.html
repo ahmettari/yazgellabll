@@ -1,11 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Yönetici Paneli</title>
+    <style>
+        /* Genel Stil */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Üst Menü */
+        .header {
+            background-color: #09862a;  
+            color: white;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Container İçeriği */
+        .container {
+            width: 80%;
+            margin: 80px auto 20px auto;  /* Yukarıdaki sabit menü ile uyumlu olması için margin-top ekledik */
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+        }
+
+        /* Başlıklar */
+        section h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #068a23;  /* Başlık renklerinde mavi */
+        }
+
+        /* Akademik Kadro Kriterleri */
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+        }
+
+        textarea, select, input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            background-color: #0d9a1f;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0b6606;
+        }
+
+        /* Başvuru Listeleme */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        ul li:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Başvurular Paneli */
+        #application-panel {
+            margin-top: 20px;
+        }
+
+        /* Gizli Panel */
+        .hidden {
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2e8005;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    
+    <!-- Üst Menü -->
+    <div class="header">
+        <div class="logo">
+            <h2>Yönetici Paneli</h2>
+        </div>
+        <div class="navbar">
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Duyurular</a>
+            <a href="#">Başvurular</a>
+        </div>
+    </div>
+
+    <!-- İçerik -->
+    <div class="container">
+        <h1>Yönetici Paneli</h1>
+        
+        <section class="criteria">
+            <h2>Akademik Kadro Kriterleri</h2>
+            <select id="kadro-secimi">
+                <option value="dr">Dr. Öğr. Üyesi</option>
+                <option value="docent">Doçent</option>
+                <option value="profesor">Profesör</option>
+            </select>
+            <textarea placeholder="Seçilen kadro için kriterleri giriniz..."></textarea>
+            <button>Kaydet</button>
+        </section>
+        
+        <section class="applications">
+            <h2>Başvurular</h2>
+            <p>Toplam Başvuru: <span id="application-count">0</span></p>
+            <button onclick="toggleApplicationPanel()">Başvuruları Görüntüle</button>
+            <div id="application-panel" class="hidden">
+                <ul id="application-list">
+                    <li onclick="showApplicantDetails('Aday 1')">Aday 1</li>
+                    <li onclick="showApplicantDetails('Aday 2')">Aday 2</li>
+                </ul>
+                <div id="applicant-details" class="hidden">
+                    <h3>Aday Belgeleri</h3>
+                    <ul id="document-list">
+                        <li>Belge 1</li>
+                        <li>Belge 2</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="jury-selection">
+            <h2>Jüri Seçimi</h2>
+            <select id="jury-list">
+                <option>Jüri Üyesi 1</option>
+                <option>Jüri Üyesi 2</option>
+            </select>
+            <input type="text" placeholder="TC Kimlik No ile jüri ekleyin">
+            <button>Jüri Ekle</button>
+        </section>
+        
+        <section class="evaluation">
+            <h2>Değerlendirme Raporları</h2>
+            <button>Raporları Görüntüle</button>
+        </section>
+        
+        <section class="notification">
+            <h2>Bildirim Gönder</h2>
+            <select id="applicant-list">
+                <option>Aday 1</option>
+                <option>Aday 2</option>
+            </select>
+            <textarea placeholder="Adaya mesajınızı yazınız..."></textarea>
+            <button>Gönder</button>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Kocaeli Üniversitesi</p>
+    </footer>
+
+    <script>
+        function toggleApplicationPanel() {
+            const panel = document.getElementById('application-panel');
+            panel.classList.toggle('hidden');
+        }
+
+        function showApplicantDetails(applicantName) {
+            const details = document.getElementById('applicant-details');
+            details.classList.remove('hidden');
+            alert('Detaylar: ' + applicantName);
+        }
+    </script>
 </body>
 </html>
