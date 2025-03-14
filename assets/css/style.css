@@ -2,6 +2,13 @@
 /*
 sonradan eklenen css dizaynları bu kısıma açıklamaları ile eklensin
 */
+.full-width-card {
+  width: 100%;
+}
+
+
+
+
 /* Navbar genel ayarları */
 .navbar {
     margin-left: auto; /* Sağ tarafa yaslamak için */
