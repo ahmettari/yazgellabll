@@ -3,12 +3,135 @@ document.querySelector(".menu-toggle").addEventListener("click", function () {
     document.querySelector(".nav-menu").classList.toggle("active");
   });
   
+
+
+/*--------------------------------------------------------------------------------------*/
+/*Admin Sayfası Belge Yükleme Kısmı ile ilgili js kodları */
+
+  let selectedDocuments = []; // Seçilen belgeleri saklayan dizi
+
+  function updateRequiredDocuments() {
+    const position = document.getElementById("positionSelect").value;
+    const documentsSection = document.getElementById("documentsSection");
+
+    // Eğer pozisyon seçilmişse, belge bölümlerini göster
+    if (position) {
+      documentsSection.style.display = "block";
+    } else {
+      documentsSection.style.display = "none";
+    }
+
+    // Pozisyona göre zorunlu belgeler
+    const documents = {
+      doktor: ["Torpil","Diploma", "Uzmanlık Sertifikası", "YDS Sonuç Belgesi"],
+      profesor: ["Torpil","A Tipi Makale", "YDS Sonuç Belgesi", "Akademik Deneyim Belgesi"],
+      ogretimGorevlisi: ["Torpil","Diploma", "Öğretim Deneyimi Belgesi", "YDS Sonuç Belgesi"],
+      stajyer: ["Torpil","Öğrenci Belgesi", "CV", "Staj Kabul Belgesi"],
+    };
+
+    // Listeyi temizle
+    selectedDocuments = documents[position] ? [...documents[position]] : [];
+    renderDocumentList();
+  }
+
+  function addExtraDocument() {
+    const select = document.getElementById("extraDocumentSelect");
+    const selectedValue = select.value;
+
+    if (selectedValue && !selectedDocuments.includes(selectedValue)) {
+      selectedDocuments.push(selectedValue);
+      renderDocumentList();
+    }
+  }
+
+  function removeDocument(index) {
+    const documentName = selectedDocuments[index];
+
+    // Kullanıcıya onay mesajı göster
+    const confirmDelete = confirm(`"${documentName}" belgesini kaldırmak istediğinize emin misiniz?`);
+
+    if (confirmDelete) {
+      selectedDocuments.splice(index, 1);
+      renderDocumentList();
+    }
+  }
+
+  function renderDocumentList() {
+    const documentsList = document.getElementById("requiredDocumentsList");
+    documentsList.innerHTML = "";
+
+    selectedDocuments.forEach((doc, index) => {
+      const div = document.createElement("div");
+      div.className = "d-flex align-items-center mb-2";
+
+      const label = document.createElement("span");
+      label.textContent = doc;
+      label.className = "me-3";
+
+      const removeBtn = document.createElement("button");
+      removeBtn.className = "btn btn-danger btn-sm";
+      removeBtn.innerHTML = "x";
+      removeBtn.onclick = () => removeDocument(index);
+
+      div.appendChild(label);
+      div.appendChild(removeBtn);
+
+      documentsList.appendChild(div);
+    });
+  }
+  /*------------------------------------------------------------------------------------ */
+
+
+
   
   
-  
-  
-  
-    
+/* Bu kısım admin panelindeki başvuru koşullarını belirlemek için kullanıldı */
+
+function addCondition() {
+  const conditionsList = document.getElementById("conditionsList");
+
+  // Yeni koşul satırı oluştur
+  const conditionRow = document.createElement("div");
+  conditionRow.className = "d-flex align-items-center mb-2";
+
+  // Koşul için input alanı
+  const input = document.createElement("input");
+  input.type = "text";
+  input.className = "form-control me-2";
+  input.placeholder = "Koşul Giriniz";
+
+  // Ekle/Kaldır butonu
+  const button = document.createElement("button");
+  button.className = "btn btn-success";
+  button.textContent = "Ekle";
+
+  // Butona tıklandığında
+  button.onclick = function (event) {
+      event.preventDefault(); // Sayfanın yenilenmesini engeller
+
+      if (button.textContent === "Ekle") {
+          button.textContent = "Kaldır"; 
+          button.className = "btn btn-danger"; 
+          addCondition(); // Yeni koşul alanı ekle
+      } else {
+          conditionRow.remove(); // Satırı kaldır
+      }
+  };
+
+  // Elemanları div içine ekle
+  conditionRow.appendChild(input);
+  conditionRow.appendChild(button);
+  conditionsList.appendChild(conditionRow);
+}
+
+// Sayfa yüklendiğinde ilk koşul giriş alanını oluştur
+document.addEventListener("DOMContentLoaded", function () {
+  addCondition();
+});
+
+
+/*-------------------------------------------------------------------------------------*/
+
   
   /*Bu kısımdan altta kalan kısımlar sitenin kendi js kodları */
   

@@ -173,8 +173,7 @@
                       <button type="button" class="btn btn-primary rounded-pill w-100">İlanı Ara</button>
                     </div>
                   </div>
-                  
-             
+                
                 </div> <!-- row bitiş -->
               </form>
               <!-- Form Bitiş -->
@@ -187,98 +186,113 @@
       <br>
       <br>
       
-
-    <section class="section" style="background-color: whitesmoke;">
+      <section class="section" style="background-color: whitesmoke;">
         <div class="container">
           <div class="row">
             <div class="col-12">
               <!-- Genel Form -->
               <form class="w-100">
-
                 <br>
-                <h5 style="font-weight: bold;">İlan Ekle</h5>
+                <h5 style="font-weight: bold;">İlan Ekle/Düzenle</h5>
                 <br>
-
+      
                 <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="inputText" class="form-label">İlan ID</label>
+                    <input type="text" class="form-control w-25" readonly>
+                  </div>
+                </div>
+      
+                <br>
+      
+                 <!-- Pozisyon Seçimi -->
+               <label class="form-label">Pozisyon</label>
+               <select class="form-select" id="positionSelect" onchange="updateRequiredDocuments()">
+                 <option value="">Buradan Seçiminizi Yapınız</option>
+                 <option value="doktor">Doktor</option>
+                 <option value="profesor">Profesör</option>
+                 <option value="ogretimGorevlisi">Öğretim Görevlisi</option>
+                 <option value="stajyer">Stajyer</option>
+               </select>
+
+      
+                <br>
+      
+                <div class="col-12 mb-3">
+                  <label for="inputEmail" class="form-label">İlan Başlık</label>
+                  <input type="email" class="form-control">
+                </div>
+      
+                <div class="col-12 mb-3">
+                  <label for="inputDescription" class="form-label">İlan Açıklaması</label>
+                  <textarea class="form-control" style="height: 150px;" id="inputDescription" placeholder="İlan açıklamanızı buraya yazın..."></textarea>
+                </div>
+      
+                <br>
+      
+                <div class="col-12 mb-3">
+                  <label for="formFile" class="form-label">Görsel Yükle</label>
+                  <input class="form-control" type="file" id="formFile" accept="image/*">
+                </div>
+                
+                <br>
+                <div class="col-12 mb-3">
+                  <div class="row">
                     <div class="col-md-6 mb-3">
-                      <label for="inputText" class="form-label">İlan ID</label>
-                      <input type="text" class="form-control w-25" readonly>
+                      <label for="inputStartDate" class="form-label">Başlangıç Tarihi</label>
+                      <input type="date" class="form-control" id="inputStartDate">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="inputEndDate" class="form-label">Bitiş Tarihi</label>
+                      <input type="date" class="form-control" id="inputEndDate">
                     </div>
                   </div>
+                </div>
       
-                  <div class="col-12 mb-3">
-                    <label for="inputEmail" class="form-label">İlan Başlık</label>
-                    <input type="email" class="form-control">
-                  </div>
 
-                  <div class="col-12 mb-3">
-                    <label for="inputDescription" class="form-label">İlan Açıklaması</label>
-                    <textarea class="form-control" style="height: 150px;" id="inputDescription" placeholder="İlan açıklamanızı buraya yazın..."></textarea>
-                  </div>
-                  
 
-                  <div class="col-12 mb-3">
-                    <label for="formFile" class="form-label">Görsel Yükle</label>
-                    <input class="form-control" type="file" id="formFile" accept="image/*" onchange="previewImage(event)">
-                  </div>
-                  
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Yüklenen Görsel</label>
-                    <img id="preview" src="" alt="Görsel Önizleme" style="display: none; max-width: 100%; height: auto;">
-                  </div>
+                <div id="conditionsSection">
                   <br>
-                    <br>
-                  <script>
-                    function previewImage(event) {
-                      const file = event.target.files[0];
-                      const reader = new FileReader();
-                  
-                      reader.onload = function(e) {
-                        const preview = document.getElementById('preview');
-                        preview.src = e.target.result;
-                        preview.style.display = 'block'; // Görseli göster
-                      };
-                  
-                      if (file) {
-                        reader.readAsDataURL(file);
-                      }
-                    }
-                  </script>
+                  <h5>İlan için Başvuru Koşulları</h5>
+                  <div id="conditionsList"></div> 
+              </div>      
 
-                    
-                    <div class="col-12 mb-3">
-                        <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="inputStartDate" class="form-label">Başlangıç Tarihi</label>
-                            <input type="date" class="form-control" id="inputStartDate">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="inputEndDate" class="form-label">Bitiş Tarihi</label>
-                            <input type="date" class="form-control" id="inputEndDate">
-                        </div>
-                        </div>
-                    </div>
+              <br>
+              <br>
 
-      
-                  <div class="col-12 mb-3">
-                    <label class="form-label">Pozisyon</label>
-                    <select class="form-select">
-                      <option selected>Buradan Seçiminizi Yapınız</option>
-                      <option value="1">Doktor</option>
-                      <option value="2">Profesör</option>
-                      <option value="3">Öğretim Görevlisi</option>
-                      <option value="4">Stajyer</option>
+              
+                <!-- Başvuru için gerekli belgeler ve ekstra belge ekleme bölümü -->
+                <div id="documentsSection" style="display: none;">
+                  <br>
+                  
+                  <!-- Başvuru için gerekli belgeler -->
+                  <h3>Başvuru Belgelerini Düzenle</h3>
+                  <div id="requiredDocumentsList"></div>
+
+                  <br>
+
+                  <!-- Ekstra belge ekleme -->
+                  <label class="form-label">Ekstra Belge Ekle</label>
+                  <div class="d-flex">
+                    <select class="form-select me-2" id="extraDocumentSelect">
+                      <option value="">Belge Seçiniz</option>
+                      <option value="Torpil">Torpil</option>
+                      <option value="Kimlik Fotokopisi">Kimlik Fotokopisi</option>
+                      <option value="Sicil Kaydı">Sicil Kaydı</option>
+                      <option value="Sağlık Raporu">Sağlık Raporu</option>
+                      <option value="Referans Mektubu">Referans Mektubu</option>
                     </select>
-                  </div>
-      
-                  <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary">İlanı Ekle</button>
-                  </div>
+                    <button type="button" class="btn btn-primary" onclick="addExtraDocument()">Ekle</button>                  </div>
+                </div>
 
-                  <br>
 
+                
+           
       
-                </div> <!-- row bitiş -->
+                <div class="col-12 text-center">
+                  <button  style="margin-top: 10px;" type="submit" class="btn btn-primary">İlanı Ekle</button>
+                </div>
+                <br>
               </form>
               <!-- Form Bitiş -->
             </div>
@@ -286,8 +300,8 @@
         </div>
       </section>
       
-   
 
+      
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
