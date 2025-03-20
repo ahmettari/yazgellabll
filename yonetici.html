@@ -1,235 +1,278 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yönetici Paneli</title>
-    <style>
-        /* Genel Stil */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-        /* Üst Menü */
-        .header {
-            background-color: #09862a;  
-            color: white;
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+  <title>Boş Sayfa</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-        .logo h2 {
-            margin: 0;
-            font-size: 24px;
-        }
+  <link href="assets/img/Kouyenilogo.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        .navbar a {
-            color: white;
-            margin-left: 20px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-        }
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-        .navbar a:hover {
-            text-decoration: underline;
-        }
 
-        /* Container İçeriği */
-        .container {
-            width: 80%;
-            margin: 80px auto 20px auto;  /* Yukarıdaki sabit menü ile uyumlu olması için margin-top ekledik */
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            color: #333;
-        }
+  <link href="assets/css/style.css" rel="stylesheet">
 
-        /* Başlıklar */
-        section h2 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            color: #068a23;  /* Başlık renklerinde mavi */
-        }
-
-        /* Akademik Kadro Kriterleri */
-        section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-        }
-
-        textarea, select, input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            background-color: #f9f9f9;
-        }
-
-        button {
-            background-color: #0d9a1f;
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 5px;
-            width: 100%;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #0b6606;
-        }
-
-        /* Başvuru Listeleme */
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        ul li:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Başvurular Paneli */
-        #application-panel {
-            margin-top: 20px;
-        }
-
-        /* Gizli Panel */
-        .hidden {
-            display: none;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #2e8005;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
 </head>
+
 <body>
-    <!-- Üst Menü -->
-    <div class="header">
-        <div class="logo">
-            <h2>Yönetici Paneli</h2>
-        </div>
-        <div class="navbar">
-            <a href="#">Ana Sayfa</a>
-            <a href="#">Duyurular</a>
-            <a href="#">Başvurular</a>
-        </div>
-    </div>
 
-    <!-- İçerik -->
-    <div class="container">
-        <h1>Yönetici Paneli</h1>
-        
-        <section class="criteria">
-            <h2>Akademik Kadro Kriterleri</h2>
-            <select id="kadro-secimi">
-                <option value="dr">Dr. Öğr. Üyesi</option>
-                <option value="docent">Doçent</option>
-                <option value="profesor">Profesör</option>
-            </select>
-            <textarea placeholder="Seçilen kadro için kriterleri giriniz..."></textarea>
-            <button>Kaydet</button>
-        </section>
-        
-        <section class="applications">
-            <h2>Başvurular</h2>
-            <p>Toplam Başvuru: <span id="application-count">0</span></p>
-            <button onclick="toggleApplicationPanel()">Başvuruları Görüntüle</button>
-            <div id="application-panel" class="hidden">
-                <ul id="application-list">
-                    <li onclick="showApplicantDetails('Aday 1')">Aday 1</li>
-                    <li onclick="showApplicantDetails('Aday 2')">Aday 2</li>
-                </ul>
-                <div id="applicant-details" class="hidden">
-                    <h3>Aday Belgeleri</h3>
-                    <ul id="document-list">
-                        <li>Belge 1</li>
-                        <li>Belge 2</li>
-                    </ul>
-                </div>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="index.html" class="logo d-flex align-items-center">
+      <img src="assets/img/Kouyenilogo.png" alt="">
+      <span class="d-none d-lg-block">Kocaeli Üniversitesi</span>
+    </a>
+  </div><!-- End Logo -->
+
+  <div class="menu-toggle">&#9776;</div>
+
+  <!-- Üst Menü -->
+  <nav class="navbar">
+    <ul class="nav-menu d-flex align-items-center">
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="ilan-ekle.html">İlan Ekle/Düzenle</a></li>
+      <li><a href="basvurular.html">Başvurular</a></li>
+    </ul>
+  </nav>
+  <!-- End Üst Menü -->
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      
+      <!-- Bildirimler -->
+      <li class="nav-item dropdown">
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-bell"></i>
+          <span class="badge bg-primary badge-number">4</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <li class="dropdown-header">
+            4 yeni bildiriminiz var
+            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li class="notification-item">
+            <i class="bi bi-exclamation-circle text-warning"></i>
+            <div>
+              <h4>Lorem Ipsum</h4>
+              <p>Örnek bildirim açıklaması</p>
+              <p>30 dk önce</p>
             </div>
-        </section>
-        
-        <section class="jury-selection">
-            <h2>Jüri Seçimi</h2>
-            <select id="jury-list">
-                <option>Jüri Üyesi 1</option>
-                <option>Jüri Üyesi 2</option>
-            </select>
-            <input type="text" placeholder="TC Kimlik No ile jüri ekleyin">
-            <button>Jüri Ekle</button>
-        </section>
-        
-        <section class="evaluation">
-            <h2>Değerlendirme Raporları</h2>
-            <button>Raporları Görüntüle</button>
-        </section>
-        
-        <section class="notification">
-            <h2>Bildirim Gönder</h2>
-            <select id="applicant-list">
-                <option>Aday 1</option>
-                <option>Aday 2</option>
-            </select>
-            <textarea placeholder="Adaya mesajınızı yazınız..."></textarea>
-            <button>Gönder</button>
-        </section>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li class="dropdown-footer">
+            <a href="#">Tüm Bildirimleri Göster</a>
+          </li>
+        </ul>
+      </li>
+      <!-- End Bildirimler -->
+
+      <!-- Mesajlar -->
+      <li class="nav-item dropdown">
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-chat-left-text"></i>
+          <span class="badge bg-success badge-number">3</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+          <li class="dropdown-header">
+            3 yeni mesajınız var
+            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Tümünü Gör</span></a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li class="dropdown-footer">
+            <a href="#">Tüm Mesajları Göster</a>
+          </li>
+        </ul>
+      </li>
+      <!-- End Mesajlar -->
+
+      <!-- Profil Menüsü -->
+      <li class="nav-item dropdown pe-3">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">221307087</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>Ahmet Tarı</h6>
+            <span>Admin</span>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <i class="bi bi-person"></i>
+              <span>Profilim</span>
+            </a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <i class="bi bi-question-circle"></i>
+              <span>Yardım</span>
+            </a>
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="#">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Çıkış Yap</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!-- End Profil Menüsü -->
+
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+
+<main id="main" class="main">
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h2 class="text-center">Yönetici Paneli</h2>
+
+          <!-- Akademik Kadro Kriterleri Belirleme -->
+          <div class="card mb-3">
+            <div class="card-header">Akademik Kadro Kriterleri</div>
+            <div class="card-body">
+              <form>
+                <div class="mb-3">
+                  <label class="form-label">Kadro Türü</label>
+                  <select class="form-select">
+                    <option>Dr. Öğr. Üyesi</option>
+                    <option>Doçent</option>
+                    <option>Profesör</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Gerekli Koşullar</label>
+                  <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Başvurular Yönetimi -->
+          <div class="card mb-3">
+            <div class="card-header">Başvurular</div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Aday Adı</th>
+                    <th>Puan</th>
+                    <th>Belgeler</th>
+                    <th>İşlem</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Ahmet Yılmaz</td>
+                    <td>85</td>
+                    <td><a href="#">PDF Görüntüle</a></td>
+                    <td><button class="btn btn-success">Onayla</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Jüri Seçimi -->
+          <div class="card mb-3">
+            <div class="card-header">Jüri Seçimi</div>
+            <div class="card-body">
+              <form>
+                <div class="mb-3">
+                  <label class="form-label">Jüri Üyesi TC Kimlik No</label>
+                  <input type="text" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Ekle</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Nihai Karar ve Sonuçlar -->
+          <div class="card mb-3">
+            <div class="card-header">Başvuru Sonuçları</div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Aday Adı</th>
+                    <th>Durum</th>
+                    <th>İşlem</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Mehmet Kaya</td>
+                    <td>Beklemede</td>
+                    <td><button class="btn btn-warning">Değerlendir</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
+</main>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Kocaeli Üniversitesi</p>
-    </footer>
+  </main><!-- End #main -->
 
-    <script>
-        function toggleApplicationPanel() {
-            const panel = document.getElementById('application-panel');
-            panel.classList.toggle('hidden');
-        }
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
 
-        function showApplicantDetails(applicantName) {
-            const details = document.getElementById('applicant-details');
-            details.classList.remove('hidden');
-            alert('Detaylar: ' + applicantName);
-        }
-    </script>
+    <a href="index.html">
+      <div style="align-items: center; display: flex; justify-content: center;">
+        <img src="assets/img/Kouyenilogo.png" alt="" style="max-width: 100%; height: auto; width: 6%;">
+      </div> <!---Logo Bitiş-->
+    </a>
+   
+    <br>
+
+    <div class="copyright">
+      &copy; Telif Hakkı <strong><span>Kocaeli Üniversitesi</span></strong>. Tüm Hakları Saklıdır
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
 </body>
+
 </html>
